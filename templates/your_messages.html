@@ -1,0 +1,131 @@
+<html>
+  <style>
+    body{
+      font-size: 15pt;
+      font-family: arial;
+    }
+    .column {
+      float: left;
+      width: 50%;
+    }
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  </style>
+  <div class="row">
+      <div class="column">
+        <body>
+          <h1>Bootleg Twitter</h1>
+          - - - - - - - - - - - - CREATE AN ACCOUNT - - - - - - - - - - - -
+          <br/>
+          <form method="GET" action="/create_account">
+              <p>Enter your preferred handle (must be at most 20 characters): <input type="text" name="handle">
+              <p> All users are unverified by default. Would you like to request verification?
+              <input type="checkbox" name="checkbox">
+              <br/>
+              <br/>
+              <input type="submit" value="Enter"></p>
+          </form>
+          - - - - - - - - - - - - CREATE A TWEET - - - - - - - - - - - -
+          <br/>
+          <form method="GET" action="/create">
+            <p>Enter your handle: <input type="text" name="handle"></p>
+            <p>Enter text: <input type="text" name="text"></p>
+            <p>Enter media: <input type="text" name="media"></p>
+            <p><input type="submit" value="Enter"></p>
+          </form>
+          - - - - - - - - - - - - VIEW YOUR TWEETS - - - - - - - - - - - -
+          <br/>
+          <form method="GET" action="/your_tweets">
+              <p>Enter your handle: <input type="text" name="handle"> <input type="submit" value="Enter"></p>
+          </form>
+          - - - - - - - - - - - - FOLLOW A USER - - - - - - - - - - - -
+          <br/>
+          <form method="POST" action="/add">
+              <p>Who are you?: <input type="text" name="followerHandle"> </p>
+              <p> Who would you like to follow?: <input type="text" name="followedHandle">
+              <br/>
+              <br/>
+              <input type="submit" value="Follow"></p>
+          </form>
+          - - - - - - - - - - - - VIEW TWEETS OF PEOPLE YOU FOLLOW - - - - - - - - - - - -
+          <br/>
+          <form method="GET" action="/display">
+              <p>Enter your handle: <input type="text" name="handle"> <input type="submit" value="Enter"></p>
+          </form>
+      </body>
+    </div>
+    <div class="column">
+      <br/>
+      <div>
+        - - - - - - - - - - - - SEND A MESSAGE - - - - - - - - - - - -
+        <br/>
+          <form method="GET" action="/createMessage">
+            <p> Your handle: <input type="text" name="senderHandle"> </p>
+            <p> Recipient handle: <input type="text" name="recipientHandle"></p>
+            <p> Message text: <input type="text" name="messageText"></p>
+            <p> Message media: <input type="text" name="messageMedia"></p>
+            <input type="submit" value="Send"></p>
+          </form>
+      </div>
+      <div>
+        - - - - - - - - - - - - VIEW YOUR MESSAGES - - - - - - - - - - - -
+        <br/>
+          <form method="GET" action="/your_messages">
+          <p>Enter your handle: <input type="text" name="handle"> <input type="submit" value="Enter"></p>
+          </form>
+          Your messages:
+          <br/>
+          <br/>
+          {% for key, value in messages.items()%}
+          <div>{{loop.index}}. <b>{{value[7]}}</b> (on {{value[5]}} at {{value[6]}})</div>
+          {% if value[2] %}
+          <div>{{value[2]}}</div>
+          {% endif %}
+          {% if value[3] %}
+          <div><img src="{{value[3]}}"</img></div>
+          {% endif %}
+          <br/>
+          <br/>
+          {% endfor %}
+      </div>
+      <div>
+        - - - - - - - - - - - - CREATE A STORY - - - - - - - - - - - -
+        <br/>
+        <form method="GET" action="/createStory">
+            <p>Enter your handle: <input type="text" name="handle"></p>
+            <p>Enter text: <input type="text" name="text"></p>
+            <p>Enter media: <input type="text" name="media"></p>
+            <p><input type="submit" value="Enter"></p>
+        </form>
+      </div>
+      <div>
+        - - - - - - - VIEW STORIES OF PEOPLE YOU FOLLOW - - - - - - -
+        <br/>
+        <form method="GET" action="/displayStories">
+            <p>Enter your handle: <input type="text" name="handle"> <input type="submit" value="Enter"></p>
+        </form>
+      </div>
+      <div>
+        - - - - - - - - - - - - VIEW YOUR NOTIFICATIONS - - - - - - - - - - - -
+        <br/>
+        <form method="GET" action="/your_notifications">
+            <p>Enter your handle: <input type="text" name="handle"> <input type="submit" value="Enter"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <br/>
+    <br/>
+    <body>
+      - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - BROWSE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      <br/>
+      <form method="GET" action="/browse">
+          <p>Enter any handle: <input type="text" name="handle"> <input type="submit" value="Enter"></p>
+      </form>
+    </body>
+  </div>
+</html>
